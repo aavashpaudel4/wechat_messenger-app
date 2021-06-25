@@ -2,15 +2,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:we_chat/helper/sharedpref.dart';
 import 'package:we_chat/home.dart';
 import 'package:we_chat/services/dataBase.dart';
+import 'package:we_chat/signIn.dart';
 
 class AuthService {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<User> getCurrentUser() async {
-    return await auth.currentUser;
+  getCurrentUser() async {
+    return auth.currentUser;
   }
 
   static Future signInWithGoogle(BuildContext context) async {
@@ -51,5 +53,11 @@ class AuthService {
             context, MaterialPageRoute(builder: (context) => Home()));
       });
     }
+  }
+
+  signOut() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    await auth.signOut();
   }
 }

@@ -18,7 +18,7 @@ class _SignInState extends State<SignIn> {
             },
             child: Container(
               alignment: Alignment.center,
-              height: 30,
+              height: 60,
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
